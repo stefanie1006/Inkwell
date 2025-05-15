@@ -1,0 +1,68 @@
+<!-- journal.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inkwell Journal</title>
+    <!-- Include same styles as landing page -->
+    <style>
+        /* Add these styles to your existing CSS */
+        .journal-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        
+        .journal-toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .journal-toolbar button {
+            background: #f8f4e8;
+            border: 1px solid #e0d6c0;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        
+        #journalEditor {
+            min-height: 500px;
+            padding: 20px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="journal-container">
+        <div class="journal-toolbar">
+            <button data-command="bold"><b>B</b></button>
+            <button data-command="italic"><i>I</i></button>
+            <button data-command="insertUnorderedList">• List</button>
+            <button data-command="undo">↩ Undo</button>
+        </div>
+        <div id="journalEditor" contenteditable="true">
+            <p>Dear Journal,</p>
+            <p><br></p>
+            <p>Today I discovered Inkwell...</p>
+        </div>
+    </div>
+    
+    <script>
+    document.querySelectorAll('[data-command]').forEach(button => {
+        button.addEventListener('click', function() {
+            const command = this.getAttribute('data-command');
+            document.execCommand(command, false, null);
+            document.getElementById('journalEditor').focus();
+        });
+    });
+    </script>
+</body>
+</html>
